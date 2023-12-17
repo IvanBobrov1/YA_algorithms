@@ -1,11 +1,11 @@
 """
-Время посылки:  16 дек 2023, 23:19:44
-           ID:  103107523
+Время посылки:  17 дек 2023, 13:14:36
+           ID:  103128283
        Задача:  A
    Компилятор:  Python 3.11.4
       Вердикт:  OK
-        Время:  58ms
-       Память:  4.24Mb
+        Время:  49ms
+       Память:  4.15Mb
 """
 import sys
 
@@ -18,23 +18,20 @@ def min_transport_platfor_for_delivery(array: int, limit: int) -> int:
     left_index: int = 0
     rigth_index: int = len(array) - 1
     while left_index <= rigth_index:
+        count_platform += 1
         if array[rigth_index] == limit:
-            count_platform += 1
             rigth_index -= 1
             continue
         if left_index == rigth_index:
-            count_platform += 1
             break
         if array[rigth_index] < limit:
-            if (array[left_index] + array[rigth_index]) == limit:
-                count_platform += 1
+            weight_sum = (array[left_index] + array[rigth_index])
+            if weight_sum == limit:
                 rigth_index -= 1
                 left_index += 1
-            elif (array[left_index] + array[rigth_index]) > limit:
-                count_platform += 1
+            elif weight_sum > limit:
                 rigth_index -= 1
             else:
-                count_platform += 1
                 rigth_index -= 1
                 left_index += 1
     return count_platform
